@@ -1,0 +1,40 @@
+﻿@* @using AspNet_MVC_SPD115.Data.Entities; *@
+@model List<AspNet_MVC_SPD115.Data.Entities.Product>;
+
+<h1>Product List</h1>
+<p>You can manage the available products here...</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <th scope="row">@i.Id</th>
+                <td>@i.Name</td>
+                <td>@i.Price$</td>
+                <td>@(i.Discount ?? 0)%</td>
+                <td>
+                    @if (i.InStock)
+                    {
+                        <span class="badge bg-success">In Stock</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Out of Stock</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p class="text-center">Count: @Model.Count</p>
