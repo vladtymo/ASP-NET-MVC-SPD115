@@ -12,12 +12,13 @@
             <th scope="col">Price</th>
             <th scope="col">Discount</th>
             <th scope="col">Status</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var i in Model)
         {
-            <tr>
+            <tr class="align-middle">
                 <th scope="row">@i.Id</th>
                 <td>@i.Name</td>
                 <td>@i.Price$</td>
@@ -31,6 +32,12 @@
                     {
                         <span class="badge bg-secondary">Out of Stock</span>
                     }
+                </td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a asp-action="Show" asp-route-id="@i.Id" class="btn btn-secondary">Show</a>
+                        <a asp-action="Delete" asp-route-id="@i.Id" class="btn btn-danger">Delete</a>
+                    </div>
                 </td>
             </tr>
         }

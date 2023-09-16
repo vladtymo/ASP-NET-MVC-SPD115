@@ -123,7 +123,7 @@ namespace AspNet_MVC_SPD115.Migrations
                             Id = 1,
                             CategoryId = 1,
                             ImageUrl = "https://applecity.com.ua/image/cache/catalog/0iphone/ipohnex/iphone-x-black-1000x1000.png",
-                            InStock = false,
+                            InStock = true,
                             Name = "iPhone X",
                             Price = 650m
                         },
@@ -131,6 +131,7 @@ namespace AspNet_MVC_SPD115.Migrations
                         {
                             Id = 2,
                             CategoryId = 2,
+                            Discount = 20,
                             ImageUrl = "https://http2.mlstatic.com/D_NQ_NP_727192-CBT53879999753_022023-V.jpg",
                             InStock = false,
                             Name = "PowerBall",
@@ -140,8 +141,9 @@ namespace AspNet_MVC_SPD115.Migrations
                         {
                             Id = 3,
                             CategoryId = 3,
+                            Discount = 15,
                             ImageUrl = "https://www.seekpng.com/png/detail/316-3168852_nike-air-logo-t-shirt-nike-t-shirt.png",
-                            InStock = false,
+                            InStock = true,
                             Name = "Nike T-Shirt",
                             Price = 189m
                         },
@@ -158,6 +160,7 @@ namespace AspNet_MVC_SPD115.Migrations
                         {
                             Id = 5,
                             CategoryId = 6,
+                            Discount = 5,
                             ImageUrl = "https://cdn.shopify.com/s/files/1/0046/1163/7320/products/69ee701e-e806-4c4d-b804-d53dc1f0e11a_grande.jpg",
                             InStock = false,
                             Name = "Air Ball",
@@ -167,8 +170,9 @@ namespace AspNet_MVC_SPD115.Migrations
                         {
                             Id = 6,
                             CategoryId = 1,
+                            Discount = 2,
                             ImageUrl = "https://newtime.ua/image/import/catalog/mac/macbook_pro/MacBook-Pro-16-2019/MacBook-Pro-16-Space-Gray-2019/MacBook-Pro-16-Space-Gray-00.webp",
-                            InStock = false,
+                            InStock = true,
                             Name = "MacBook Pro 2019",
                             Price = 1200m
                         });
