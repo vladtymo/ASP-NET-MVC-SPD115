@@ -9,6 +9,11 @@ namespace AspNet_MVC_SPD115.Controllers
     {
         Shop115DbContext ctx = new Shop115DbContext();
 
+        private void LoadCategories()
+        {
+            this.ViewBag.Categories = new SelectList(ctx.Categories.ToList(), "Id", "Name");
+        }
+
         // show all products
         public IActionResult Index()
         {
@@ -26,7 +31,7 @@ namespace AspNet_MVC_SPD115.Controllers
             // 1 - using View(model)
             // 2 - using TemoData: this.TempData["key"] = value
             // 3 - using ViewBag: this.ViewBag.Property = value
-            this.ViewBag.Categories = new SelectList(ctx.Categories.ToList(), "Id", "Name");
+            LoadCategories();
 
             return View();
         }
@@ -36,6 +41,28 @@ namespace AspNet_MVC_SPD115.Controllers
         {
             // create product in db
             ctx.Products.Add(product);
+            ctx.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        // GET: show edit product page
+        public IActionResult Edit(int id)
+        {
+            var item = ctx.Products.Find(id);
+
+            if (item == null) return NotFound(); // 404
+
+            LoadCategories();
+
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            // update product in db
+            ctx.Products.Update(product);
             ctx.SaveChanges();
 
             return RedirectToAction("Index");
