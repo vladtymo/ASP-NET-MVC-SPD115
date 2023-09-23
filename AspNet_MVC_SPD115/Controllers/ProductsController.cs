@@ -39,6 +39,13 @@ namespace AspNet_MVC_SPD115.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
+            // validate model
+            if (!ModelState.IsValid)
+            {
+                LoadCategories();
+                return View(product);
+            }
+
             // create product in db
             ctx.Products.Add(product);
             ctx.SaveChanges();
@@ -61,6 +68,13 @@ namespace AspNet_MVC_SPD115.Controllers
         [HttpPost]
         public IActionResult Edit(Product product)
         {
+            // validate model
+            if (!ModelState.IsValid)
+            {
+                LoadCategories();
+                return View(product);
+            }
+
             // update product in db
             ctx.Products.Update(product);
             ctx.SaveChanges();
