@@ -1,6 +1,7 @@
 ﻿using AspNet_MVC_SPD115.Data;
 using AspNet_MVC_SPD115.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AspNet_MVC_SPD115.Controllers
 {
@@ -21,6 +22,12 @@ namespace AspNet_MVC_SPD115.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            // Ways of sending data to View
+            // 1 - using View(model)
+            // 2 - using TemoData: this.TempData["key"] = value
+            // 3 - using ViewBag: this.ViewBag.Property = value
+            this.ViewBag.Categories = new SelectList(ctx.Categories.ToList(), "Id", "Name");
+
             return View();
         }
 
