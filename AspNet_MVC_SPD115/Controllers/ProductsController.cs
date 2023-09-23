@@ -17,6 +17,23 @@ namespace AspNet_MVC_SPD115.Controllers
             return View(products); // set view mode
         }
 
+        // GET: show creation form
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Product product)
+        {
+            // create product in db
+            ctx.Products.Add(product);
+            ctx.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         // delete product by ID
         public IActionResult Delete(int id)
         {
