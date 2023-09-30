@@ -7,7 +7,12 @@ namespace AspNet_MVC_SPD115.Controllers
 {
     public class ProductsController : Controller
     {
-        Shop115DbContext ctx = new Shop115DbContext();
+        private readonly Shop115DbContext ctx;
+
+        public ProductsController(Shop115DbContext ctx)
+        {
+            this.ctx = ctx;
+        }
 
         private void LoadCategories()
         {
