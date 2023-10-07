@@ -2,6 +2,7 @@ using DataAccess.Data;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,9 @@ string connStr = builder.Configuration.GetConnectionString("LocalDb");
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<Shop115DbContext>(opts => opts.UseSqlServer(connStr));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<Shop115DbContext>();
 
 // add FluentValidator with validation classes
 builder.Services.AddFluentValidationAutoValidation();
@@ -39,10 +43,13 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
 app.UseSession();
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
