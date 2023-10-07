@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Data
 {
-    public class Shop115DbContext : IdentityDbContext
+    public class Shop115DbContext : IdentityDbContext<User>
     {
         public Shop115DbContext() { }
         public Shop115DbContext(DbContextOptions options) : base(options) { }
@@ -42,6 +42,7 @@ namespace DataAccess.Data
                 new Product() { Id = 6, Name = "MacBook Pro 2019", CategoryId = 1, Discount = 2, InStock = true, Price = 1200, ImageUrl = "https://newtime.ua/image/import/catalog/mac/macbook_pro/MacBook-Pro-16-2019/MacBook-Pro-16-Space-Gray-2019/MacBook-Pro-16-Space-Gray-00.webp" }
             });
         }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
     }

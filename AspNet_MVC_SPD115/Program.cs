@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using DataAccess.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<Shop115DbContext>(opts => opts.UseSqlServer(connStr));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<Shop115DbContext>();
 
 // add FluentValidator with validation classes
