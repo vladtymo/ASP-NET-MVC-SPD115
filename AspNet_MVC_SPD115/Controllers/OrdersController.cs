@@ -20,7 +20,8 @@ namespace AspNet_MVC_SPD115.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var items = ctx.Orders.Where(x => x.UserId == CurrentUserId).ToList();
+            return View(items);
         }
 
         public IActionResult Create()
