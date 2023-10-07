@@ -34,6 +34,7 @@ namespace AspNet_MVC_SPD115.Controllers
                 Date = DateTime.Now,
                 UserId = CurrentUserId,
                 Products = products,
+                TotalPrice = products.Sum(x => x.Price)
             };
 
             ctx.Orders.Add(order);
