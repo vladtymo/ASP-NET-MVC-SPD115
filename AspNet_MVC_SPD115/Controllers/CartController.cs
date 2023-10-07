@@ -7,7 +7,6 @@ namespace AspNet_MVC_SPD115.Controllers
 {
     public class CartController : Controller
     {
-        const string cartItemsKey = "cart_items";
         private readonly Shop115DbContext ctx;
 
         public CartController(Shop115DbContext ctx)
@@ -17,7 +16,7 @@ namespace AspNet_MVC_SPD115.Controllers
 
         public IActionResult Index()
         {
-            var ids = HttpContext.Session.Get<List<int>>(cartItemsKey) ?? new();
+            var ids = HttpContext.Session.Get<List<int>>(Constants.cartItemsKey) ?? new();
 
             var products = ctx.Products.Where(x => ids.Contains(x.Id)).ToList();
 
@@ -26,11 +25,11 @@ namespace AspNet_MVC_SPD115.Controllers
 
         public IActionResult Add(int id)
         {
-            var ids = HttpContext.Session.Get<List<int>>(cartItemsKey) ?? new();
+            var ids = HttpContext.Session.Get<List<int>>(Constants.cartItemsKey) ?? new();
 
             ids.Add(id);
 
-            HttpContext.Session.Set(cartItemsKey, ids);
+            HttpContext.Session.Set(Constants.cartItemsKey, ids);
 
             return RedirectToAction("Index", "Home");
         }
