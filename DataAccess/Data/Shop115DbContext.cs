@@ -6,14 +6,17 @@ namespace DataAccess.Data
 {
     public class Shop115DbContext : IdentityDbContext<User>
     {
-        public Shop115DbContext() { }
+        public Shop115DbContext() 
+        {
+            //Database.Migrate();
+        }
         public Shop115DbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer("Server=tcp:sdp115server.database.windows.net,1433;Initial Catalog=spd115_mvc_db;Persist Security Info=False;User ID=admin1;Password=Qwer1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            //optionsBuilder.UseSqlServer("Server=tcp:sdp115server.database.windows.net,1433;Initial Catalog=spd115_mvc_db;Persist Security Info=False;User ID=admin1;Password=Qwer1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

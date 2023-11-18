@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using DataAccess.Data.Entities;
 using AspNet_MVC_SPD115.Helpers;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string connStr = builder.Configuration.GetConnectionString("AzureDb");
+string connStr = builder.Configuration.GetConnectionString("Test");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -35,8 +36,13 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-
 var app = builder.Build();
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var db = scope.ServiceProvider.GetRequiredService<Shop115DbContext>();
+//    db.Database.Migrate();
+//}
 
 // Seed Roles and Admin Users
 using (IServiceScope scope = app.Services.CreateScope())
