@@ -1,4 +1,6 @@
-﻿using DataAccess.Data;
+﻿using AspNet_MVC_SPD115.Helpers;
+using AspNet_MVC_SPD115.Models;
+using DataAccess.Data;
 using DataAccess.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +12,12 @@ namespace AspNet_MVC_SPD115.Controllers
     public class ProductsController : Controller
     {
         private readonly Shop115DbContext ctx;
+        private readonly IFileService fileService;
 
-        public ProductsController(Shop115DbContext ctx)
+        public ProductsController(Shop115DbContext ctx, IFileService fileService)
         {
             this.ctx = ctx;
+            this.fileService = fileService;
         }
 
         private void LoadCategories()
@@ -45,14 +49,25 @@ namespace AspNet_MVC_SPD115.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        public async Task<IActionResult> Create(CreateProductModel model)
         {
             // validate model
             if (!ModelState.IsValid)
             {
                 LoadCategories();
-                return View(product);
+                return View(model);
             }
+
+            var product = new Product()
+            {
+                Name = model.Name,
+                Description = model.Description,
+                Discount = model.Discount,
+                CategoryId = model.CategoryId,
+                InStock = model.InStock,
+                Price = model.Price,
+                ImageUrl = await fileService.SaveFileAsync(model.ImageFile)
+            };
 
             // create product in db
             ctx.Products.Add(product);
