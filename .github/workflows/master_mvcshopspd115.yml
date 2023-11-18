@@ -25,13 +25,13 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
-      - name: Run EF 
-        run: | 
-          dotnet new tool-manifest
-          dotnet tool install dotnet-ef --version 6.0.22
+      # - name: Run EF 
+        # run: | 
+          # dotnet new tool-manifest
+          # dotnet tool install dotnet-ef --version 6.0.22
           # dotnet tool install --global dotnet-ef --version 6.0.22
           # dotnet tool restore
-          dotnet ef database update -p DotNetCoreSqlDb --connection '${{ secrets.DBConnection }}'
+          # dotnet ef database update -p DotNetCoreSqlDb --connection '${{ secrets.DBConnection }}'
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
