@@ -25,6 +25,12 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
+      - name: Run EF 
+        run: | 
+          dotnet tool install --global dotnet-ef
+          dotnet tool restore
+          dotnet ef database update -p DotNetCoreSqlDb --connection '${{ secrets.DBConnection }}'
+
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
